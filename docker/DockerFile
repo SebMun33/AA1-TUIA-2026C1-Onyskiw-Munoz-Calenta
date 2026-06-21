@@ -1,0 +1,16 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY inferencia.py .
+COPY preprocessing.py .
+COPY modelo_red_neuronal.keras .
+COPY preprocesador.joblib .
+COPY columnas_modelo.joblib .
+COPY threshold.json .
+
+ENTRYPOINT ["python", "inferencia.py"]
